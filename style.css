@@ -1,0 +1,147 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* =========================
+   UNIQUE PREMIUM BACKGROUND
+   ========================= */
+.welcome-container {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background:
+    radial-gradient(circle at top left, #3a7bd5, transparent 45%),
+    radial-gradient(circle at bottom right, #00d2ff, transparent 45%),
+    linear-gradient(135deg, #0b0f1a, #111827, #020617);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  overflow: hidden;
+}
+
+/* glowing animated shapes */
+.welcome-container::before,
+.welcome-container::after {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(255,255,255,0.18), transparent 70%);
+  filter: blur(40px);
+  animation: float 12s infinite alternate ease-in-out;
+}
+
+.welcome-container::before {
+  top: -80px;
+  left: -80px;
+}
+
+.welcome-container::after {
+  bottom: -80px;
+  right: -80px;
+  animation-delay: 3s;
+}
+
+/* =========================
+   CENTER CONTENT CARD
+   ========================= */
+.content {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 50px 40px;
+  border-radius: 18px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.45);
+  animation: fadeIn 1.2s ease;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.content h1 {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 15px;
+  letter-spacing: 0.5px;
+}
+
+.content p {
+  font-size: 1rem;
+  color: #dbeafe;
+  margin-bottom: 35px;
+  line-height: 1.7;
+}
+
+/* =========================
+   BUTTON
+   ========================= */
+.btn {
+  display: inline-block;
+  padding: 14px 42px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #020617;
+  background: linear-gradient(135deg, #ffffff, #e5e7eb);
+  border-radius: 30px;
+  text-decoration: none;
+  transition: all 0.35s ease;
+}
+
+.btn:hover {
+  background: linear-gradient(135deg, #fde68a, #f59e0b);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.35);
+}
+
+/* =========================
+   ANIMATIONS
+   ========================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  from {
+    transform: translateY(0) translateX(0);
+  }
+  to {
+    transform: translateY(40px) translateX(30px);
+  }
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+   ========================= */
+@media (max-width: 600px) {
+  .content {
+    padding: 40px 25px;
+  }
+
+  .content h1 {
+    font-size: 2rem;
+  }
+
+  .content p {
+    font-size: 0.95rem;
+  }
+}
