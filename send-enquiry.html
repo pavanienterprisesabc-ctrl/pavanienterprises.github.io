@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Send Enquiry | Pavani Enterprises</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  * {
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+  }
+
+  body {
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url("bg.jpg") no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+    color: #ffffff;
+    padding: 16px;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(5px);
+    z-index: -1;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 480px;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    padding: 32px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 30px 70px rgba(0,0,0,.7);
+  }
+
+  h1 {
+    margin-bottom: 4px;
+    font-size: 26px;
+    text-align: center;
+    color: #ffd369;
+  }
+
+  .company {
+    text-align: center;
+    font-size: 14px;
+    color: #e5e7eb;
+    margin-bottom: 20px;
+  }
+
+  p {
+    margin-bottom: 24px;
+    text-align: center;
+    color: #e5e7eb;
+  }
+
+  .field {
+    margin-bottom: 16px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: #f3f4f6;
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.15);
+    color: #ffffff;
+    transition: 0.3s ease;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #d1d5db;
+  }
+
+  input:focus, textarea:focus {
+    border-color: #ffd369;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(255, 211, 105, 0.25);
+  }
+
+  textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 16px;
+    border: none;
+    background: linear-gradient(135deg, #ffd369, #ff9f1c);
+    font-weight: 600;
+    cursor: pointer;
+    color: #000000;
+    transition: 0.2s ease;
+  }
+
+  button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(255, 159, 28, 0.5);
+  }
+
+  button:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+  }
+
+  .back-btn {
+    margin-top: 12px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.4);
+    color: #ffffff;
+  }
+
+  .popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(6px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    z-index: 999;
+  }
+
+  .popup.active {
+    display: flex;
+  }
+
+  .popup-box {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(18px);
+    border-radius: 20px;
+    padding: 24px;
+    max-width: 360px;
+    width: 100%;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.25);
+    box-shadow: 0 30px 80px rgba(0,0,0,.8);
+    animation: pop 0.3s ease;
+  }
+
+  @keyframes pop {
+    from {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .popup-box.success h2 {
+    color: #22c55e;
+  }
+
+  .popup-box.error h2 {
+    color: #ef4444;
+  }
+
+  .popup-box p {
+    margin: 12px 0 20px;
+    color: #f3f4f6;
+  }
+
+  .popup-box button {
+    background: linear-gradient(135deg, #ffd369, #ff9f1c);
+    color: black;
+  }
+
+  @media (max-width: 480px) {
+    .card {
+      padding: 24px;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h1>Send an Enquiry</h1>
+    <div class="company">Pavani Enterprises</div>
+    <p>I'll respond as soon as possible</p>
+
+    <form id="enquiryForm">
+      <div class="field">
+        <label>Full Name</label>
+        <input type="text" id="fullName" required />
+      </div>
+
+      <div class="field">
+        <label>Username</label>
+        <input type="text" id="username" required />
+      </div>
+
+      <div class="field">
+        <label>Email</label>
+        <input type="email" id="email" required />
+      </div>
+
+      <div class="field">
+        <label>Phone</label>
+        <input type="tel" id="phone" required />
+      </div>
+
+      <div class="field">
+        <label>Your Concern</label>
+        <textarea id="message" required></textarea>
+      </div>
+
+      <button type="submit" id="btn">Send Enquiry</button>
+      <button type="button" class="back-btn" onclick="window.location.href='contact.html'">
+        ← Back to Contact
+      </button>
+    </form>
+  </div>
+
+  <div class="popup" id="popup">
+    <div class="popup-box" id="popupBox">
+      <h2 id="popupTitle"></h2>
+      <p id="popupMessage"></p>
+      <button onclick="closePopup()">OK</button>
+    </div>
+  </div>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyBD9ml42x0fesLcf3fReCoureRJEsf5E5Q",
+    authDomain: "pavani-auth.firebaseapp.com",
+    projectId: "pavani-auth"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+  emailjs.init({
+  publicKey: "CICL8KwafasdiHzfx"
+});
+
+  const form = document.getElementById("enquiryForm");
+  const btn = document.getElementById("btn");
+
+  const popup = document.getElementById("popup");
+  const popupBox = document.getElementById("popupBox");
+  const popupTitle = document.getElementById("popupTitle");
+  const popupMessage = document.getElementById("popupMessage");
+
+  function showPopup(type, title, message) {
+    popupBox.className = "popup-box " + type;
+    popupTitle.textContent = title;
+    popupMessage.textContent = message;
+    popup.classList.add("active");
+  }
+
+  function closePopup() {
+    popup.classList.remove("active");
+  }
+
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    if (btn.disabled) return;
+    btn.disabled = true;
+
+    const fullNameVal = document.getElementById("fullName").value.trim();
+    const usernameVal = document.getElementById("username").value.trim();
+    const emailVal = document.getElementById("email").value.trim().toLowerCase();
+    const phoneVal = document.getElementById("phone").value.trim();
+    const messageVal = document.getElementById("message").value.trim();
+
+    if (!fullNameVal || !usernameVal || !emailVal || !phoneVal || !messageVal) {
+      showPopup("error", "Missing Details", "All fields are mandatory.");
+      btn.disabled = false;
+      return;
+    }
+
+    if (!isValidEmail(emailVal)) {
+      showPopup("error", "Invalid Email", "Please enter a valid email address.");
+      btn.disabled = false;
+      return;
+    }
+
+    try {
+      const snapshot = await db
+        .collection("users")
+        .where("email", "==", emailVal.toLowerCase())
+        .limit(1)
+        .get();
+
+      if (snapshot.empty) {
+        showPopup("error", "Not Registered", "This email is not registered.");
+        btn.disabled = false;
+        return;
+      }
+
+      const userData = snapshot.docs[0].data();
+if (!userData.username || 
+    userData.username.toLowerCase() !== usernameVal.toLowerCase()) {
+        showPopup("error", "Mismatch", "Username does not match this email.");
+        btn.disabled = false;
+        return;
+      }
+
+    await emailjs.send(
+  "service_jp0pklm",
+  "template_wqa3yt5",
+  {
+    full_name: fullNameVal,
+    username: usernameVal,
+    email: emailVal,
+    phone: phoneVal,
+    message: messageVal,
+  }
+);
+
+
+      showPopup("success", "Enquiry Sent!", "Your message has been sent successfully.");
+      form.reset();
+
+    } catch (err) {
+      console.error(err);
+      showPopup("error", "Error", err.message || "Something went wrong.");
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reviews</title>
+  
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: url("bg.jpg") no-repeat center center fixed;
+    background-size: cover;
+    padding: 30px 15px;
+    margin: 0;
+    color: #ffffff;
+    position: relative;
+  }
+
+  /* 🌌 Dark overlay for readability */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(3px);
+    z-index: -1;
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+    color: #ffd369;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  }
+
+  .container {
+    max-width: 850px;
+    margin: auto;
+  }
+
+  /* ⭐ GLASS REVIEW CARD */
+  .review-box {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 22px;
+    margin-bottom: 20px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+  }
+
+  .review-box:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  }
+
+  .username {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 6px;
+    color: #ffd369;
+  }
+
+  .rating {
+    color: #ffb400;
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+
+  .review-box p {
+    margin: 8px 0 14px;
+    line-height: 1.6;
+    color: #f1f1f1;
+  }
+
+  /* 🟢 ACTION BUTTONS */
+  .actions button {
+    margin-right: 10px;
+    padding: 7px 14px;
+    border-radius: 8px;
+    border: none;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+
+  .actions button:first-child {
+    background: rgba(255, 211, 105, 0.2);
+    color: #ffd369;
+    border: 1px solid rgba(255,211,105,0.4);
+  }
+
+  .actions button:first-child:hover {
+    background: #ffd369;
+    color: #000;
+  }
+
+  .actions button:last-child {
+    background: rgba(255, 99, 99, 0.2);
+    color: #ff6b6b;
+    border: 1px solid rgba(255,99,99,0.4);
+  }
+
+  .actions button:last-child:hover {
+    background: #ff6b6b;
+    color: white;
+  }
+
+  textarea {
+    width: 100%;
+    height: 90px;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.3);
+    font-size: 14px;
+    box-sizing: border-box;
+    resize: none;
+    outline: none;
+    background: rgba(255,255,255,0.15);
+    color: white;
+    backdrop-filter: blur(6px);
+  }
+
+  textarea::placeholder {
+    color: #ddd;
+  }
+
+  textarea:focus {
+    border-color: #ffd369;
+  }
+
+  select, button {
+    padding: 9px 14px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: none;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  /* 🔵 BACK BUTTON */
+  .back-btn button {
+    background: linear-gradient(135deg, #ffd369, #ff9f1c);
+    color: black;
+    font-weight: 600;
+    box-shadow: 0 6px 18px rgba(255, 159, 28, 0.5);
+  }
+
+  .back-btn button:hover {
+    transform: translateY(-3px);
+  }
+
+  /* ✅ SAVE BUTTON */
+  #addReviewSection button:first-of-type {
+    background: linear-gradient(135deg, #ffd369, #ff9f1c);
+    color: black;
+    font-weight: 600;
+    box-shadow: 0 6px 18px rgba(255, 159, 28, 0.5);
+  }
+
+  /* ❌ DELETE BUTTON */
+  #addReviewSection button:last-of-type {
+    background: linear-gradient(135deg, #ff6b6b, #c0392b);
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 6px 18px rgba(192, 57, 43, 0.5);
+  }
+
+  /* 🔔 POPUP (GLASS STYLE) */
+  .popup-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(6px);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    padding: 15px;
+  }
+
+  .popup {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(15px);
+    padding: 25px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+  }
+
+  .popup button {
+    margin-top: 15px;
+    padding: 8px 16px;
+    background: #ffd369;
+    color: black;
+    border-radius: 8px;
+  }
+
+  /* 📱 Mobile */
+  @media (max-width: 600px) {
+    body {
+      padding: 15px;
+    }
+
+    h2 {
+      font-size: 22px;
+    }
+
+    button {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .actions button {
+      width: auto;
+      margin-bottom: 0;
+    }
+  }
+</style>
+
+
+</head>
+<body>
+
+<div class="container">
+
+  <!-- 🔙 BACK BUTTON -->
+  <div class="back-btn">
+    <button onclick="window.location.href='index.html'">⬅ Back</button>
+  </div>
+
+  <h2>CUSTOMER REVIEWS OF PAVANI ENTERPRISES</h2>
+
+  <div id="addReviewSection" style="display:none;">
+    <h3>Add / Edit Your Review</h3>
+
+    <select id="rating">
+      <option value="5">★★★★★</option>
+      <option value="4">★★★★</option>
+      <option value="3">★★★</option>
+      <option value="2">★★</option>
+      <option value="1">★</option>
+    </select>
+
+    <br><br>
+
+    <textarea id="reviewText" placeholder="Write your review..."></textarea>
+
+    <br><br>
+
+    <button onclick="saveReview()">Save Review</button>
+    <button onclick="deleteReview()">Delete Review</button>
+  </div>
+
+  <hr>
+
+  <div id="reviewsList"></div>
+
+</div>
+
+<!-- 🔔 GLOBAL POPUP (REPLACES ALL ALERTS) -->
+<div id="globalPopup" class="popup-overlay">
+  <div class="popup">
+    <h3 id="popupTitle">Notification</h3>
+    <p id="popupMessage"></p>
+    <button onclick="closePopup()">OK</button>
+  </div>
+</div>
+
+<script src="reviews.js"></script>
+
+<script>
+  function showPopup(message, title = "Notification") {
+    document.getElementById("popupTitle").innerText = title;
+    document.getElementById("popupMessage").innerText = message;
+    document.getElementById("globalPopup").style.display = "flex";
+  }
+
+  function closePopup() {
+    document.getElementById("globalPopup").style.display = "none";
+  }
+
+  /* Override default alert completely */
+  window.alert = function(message) {
+    showPopup(message);
+  };
+</script>
+
+</body>
+</html>
+
