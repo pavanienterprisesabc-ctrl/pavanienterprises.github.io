@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About Us | Pavani Enterprises</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url("bg.jpg") no-repeat center center fixed;
+      background-size: cover;
+      color: #ffffff;
+      position: relative;
+    }
+
+    /* Dark overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(4px);
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 60px 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 40px;
+      color: #ffd369;
+      letter-spacing: 1px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 35px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    .card p {
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      margin-top: 50px;
+      font-size: 24px;
+      font-weight: 700;
+      color: #ffd369;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+    /* Owner Section Styling (NO BOX) */
+    .owner-section {
+      text-align: center;
+      margin-top: 25px;
+    }
+
+    .owner-name {
+      font-size: 22px;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .owner-details {
+      font-size: 15px;
+      opacity: 0.9;
+      margin-bottom: 20px;
+    }
+
+    .owner-description {
+      font-size: 15px;
+      line-height: 1.7;
+      opacity: 0.95;
+      max-width: 750px;
+      margin: auto;
+    }
+
+    .back-btn {
+      margin-bottom: 30px;
+    }
+
+    .back-btn button {
+      background: linear-gradient(135deg, #ffd369, #ff9f1c);
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      color: black;
+      transition: 0.3s ease;
+    }
+
+    .back-btn button:hover {
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 26px;
+      }
+
+      .card {
+        padding: 25px;
+      }
+
+      .owner-name {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="back-btn">
+    <button onclick="window.location.href='index.html'">⬅ Back</button>
+  </div>
+
+  <h1>About Pavani Enterprises</h1>
+
+  <div class="card">
+
+    <p>
+      Pavani Enterprises is a trusted name committed to delivering high-quality manufacturing and business solutions with a strong focus on transparency, reliability, and professionalism. With years of industry experience, we have built a reputation for understanding our clients’ needs and providing customized solutions that drive efficiency and long-term success.
+    </p>
+
+    <p>
+      Our team of dedicated professionals works closely with clients across various industries to ensure consistent quality, timely execution, and dependable service at every stage. We believe in building lasting partnerships through integrity, innovation, and continuous improvement, making Pavani Enterprises a reliable partner for your growing business.
+    </p>
+
+    <p>
+      At Pavani Enterprises, we combine modern technology with industry expertise to deliver solutions that meet evolving market demands. Our commitment to excellence ensures that every project is handled with precision, accountability, and strategic planning.
+    </p>
+
+    <p>
+      Customer satisfaction remains at the core of our operations. We prioritize open communication, ethical practices, and long-term value creation to ensure that our clients achieve measurable growth and operational efficiency.
+    </p>
+
+    <p>
+      Through continuous improvement and innovation, we strive to maintain the highest standards of quality and performance while adapting to dynamic business environments.
+    </p>
+
+    <!-- OWNER SECTION -->
+    <div class="section-title">OWNER</div>
+
+    <div class="owner-section">
+      <div class="owner-name">
+        Pankaj Aggarwal
+      </div>
+
+      <div class="owner-details">
+        Age: 46 Years<br>
+        Date of Birth: 23 July 1979<br>
+        Leading Pavani Enterprises Since the Age of 8
+      </div>
+
+      <div class="owner-description">
+        Mr. Pankaj Aggarwal is the visionary leader behind Pavani Enterprises. 
+        With decades of hands-on experience and deep industry understanding, 
+        he has successfully transformed the company into a reliable and 
+        respected business entity. His leadership style is rooted in discipline, 
+        transparency, and long-term strategic growth.
+        <br><br>
+        Under his guidance, Pavani Enterprises has consistently focused on 
+        quality assurance, ethical business practices, and customer-first 
+        solutions. His commitment to excellence and operational efficiency 
+        continues to drive the company toward sustainable expansion and 
+        industry leadership.
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
