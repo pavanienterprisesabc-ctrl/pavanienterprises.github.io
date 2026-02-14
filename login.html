@@ -9,24 +9,52 @@
   <link rel="stylesheet" href="auth.css">
 
   <style>
-    .password-wrapper{position:relative}
-    .toggle-eye{
-      position:absolute;right:14px;top:50%;transform:translateY(-50%);
-      cursor:pointer;font-size:13px;color:#2563eb
-    }
+  .password-wrapper{position:relative}
+  .toggle-eye{
+    position:absolute;right:14px;top:50%;transform:translateY(-50%);
+    cursor:pointer;font-size:13px;color:#2563eb
+  }
 
-    /* Modal */
-    .modal-bg{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);justify-content:center;align-items:center;z-index:9999}
-    .modal{background:#fff;padding:22px;border-radius:10px;max-width:420px;width:90%;text-align:center;box-sizing:border-box}
-    #modalText{word-wrap:break-word;overflow-wrap:break-word;white-space:normal;line-height:1.5;font-size:14px}
-    .modal button{padding:10px 16px;margin-top:14px;border:none;border-radius:6px;background:#2563eb;color:#fff;cursor:pointer}
-  </style>
+  /* Back Button - Matched With auth.css Theme */
+  .back-btn{
+    display:inline-block;
+    margin: 20px 0 0 20px;
+    padding:10px 18px;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 14px;
+    color: #ffd369;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s ease;
+  }
+
+  .back-btn:hover{
+    background: linear-gradient(135deg, #ffd369, #ff9f1c);
+    color: black;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(255, 159, 28, 0.4);
+  }
+
+  /* Modal */
+  .modal-bg{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);justify-content:center;align-items:center;z-index:9999}
+  .modal{background:#fff;padding:22px;border-radius:10px;max-width:420px;width:90%;text-align:center;box-sizing:border-box}
+  #modalText{word-wrap:break-word;overflow-wrap:break-word;white-space:normal;line-height:1.5;font-size:14px}
+  .modal button{padding:10px 16px;margin-top:14px;border:none;border-radius:6px;background:#2563eb;color:#fff;cursor:pointer}
+</style>
 </head>
 <body>
 
 <div class="auth-wrapper">
 
   <div class="auth-card">
+
+    <!-- Back Button -->
+    <a href="index.html" class="back-btn">← Back</a>
+
     <div class="auth-image">
       <img src="images/welcome back.png" alt="Welcome back">
     </div>
