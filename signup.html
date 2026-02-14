@@ -27,6 +27,30 @@
   user-select:none;
 }
 
+/* Back Button - Matched With auth.css Theme */
+.back-btn{
+  display:inline-block;
+  margin: 20px 0 0 20px;
+  padding:10px 18px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 14px;
+  color: #ffd369;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.back-btn:hover{
+  background: linear-gradient(135deg, #ffd369, #ff9f1c);
+  color: black;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(255, 159, 28, 0.4);
+}
+
 .strength{font-size:12px;margin-top:6px}
 .weak{color:red}.medium{color:orange}.strong{color:green}
 .meter{height:5px;border-radius:4px;background:#e5e7eb;margin-top:6px;overflow:hidden}
@@ -87,6 +111,9 @@
 
 <div class="auth-wrapper">
 <div class="auth-card">
+
+<a href="index.html" class="back-btn">← Back</a>
+
 <div class="auth-image">
 <img src="images/businessman.png">
 </div>
